@@ -1,4 +1,8 @@
+
+const orderService = require("../service/orderService");
+
 const getAllorders = (req, res) => {
+  const allOrders = orderervice.getAllorders();
     res.send("Get all orders");
   };
   
@@ -7,7 +11,13 @@ const getAllorders = (req, res) => {
   };
   
   const createNewOrder = (req, res) => {
-    res.send("Create a new order");
+    const createdOrder = orderService.createNewOrder(req);
+    if(createdOrder==1){
+      res.send(createdOrder);
+    }else{
+      res.send(createdOrder);
+    }
+    
   };
   
   const updateOneOrder = (req, res) => {
