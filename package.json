@@ -1,0 +1,17 @@
+{
+  "name": "nodeapi",
+  "version": "1.0.0",
+  "description": "Rest Full API Developed By Tharindu",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+},
+  "author": "Tharindu de Silva",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2",
+    "nodemon": "^2.0.20"
+  }
+}
