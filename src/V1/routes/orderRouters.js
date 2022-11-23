@@ -8,7 +8,7 @@ router.get("/", orderController.getAllorders);
 
 router.get("/:orderId",orderController.getOneOrder);
 
-router.post("/", orderController.createNewOrder);
+router.post("/", orderController.createNeworder);
 
 router.patch("/:orderId",orderController.updateOneOrder);
 

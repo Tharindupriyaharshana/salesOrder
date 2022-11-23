@@ -1,7 +1,6 @@
 
-const orderdata = require("../models/orderData");
 const order = require("../models/orderModel");
-
+const { v4: uuid } = require("uuid");
 const express = require("express");
 var path = require('path');
 
@@ -17,63 +16,31 @@ const getAllOrders = () => {
   const getOneOrder = () => {
     return;
   };
-  
+
+ 
   //create new order
-  let state=1;
-  const createNewOrder = async(req) => {
 
-
- console.log( req.body.order.orderData);
- console.log(req.body.order.orderItems);
-
- const orders= new order(
-    req.body.order.orderData[0]
-        
+  const createNewOrder= (newOrder) => {
+    const orderToInsert=new order({
+      ...newOrder,
+      OrderIds: uuid(),
+      DateTime: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+      
+  });
+  try {
+    orderToInsert.save()
+      return orderToInsert;
    
-);
-   
-   await orders.save()
-        .then(status=> {
-            if(status){
-                try {
-
-                var orderItemsList=[];
-                orderItemsList=req.body.order.orderItems
-                orderItemsList.forEach(async Item=> {
-       
-                    const orderIems= new orderdata(
-                        Item
-                            
-                       
-                    );
-                       
-                  await   orderIems.save().then(status=>{
-                        if(status){
-                       state =1;
-                        };
-                       
-                })
-                
-                
-                });
-               
-           
-                    
-                } catch (error) {
-                 state=0;
-                    return state;
-                  
-                }
-               
-            }
-            console.log("71"+state);
-            return state;
-            
-});
-return state;
-   
-  };
   
+ 
+
+  } catch (error) {
+    throw error;
+  }
+
+  };
+
+ 
   const updateOneOrder = () => {
     return;
   };
@@ -85,7 +52,8 @@ return state;
   module.exports = {
     getAllOrders,
     getOneOrder,
-    createNewOrder,
     updateOneOrder,
     deleteOneOrder,
+    createNewOrder
+  
   };
