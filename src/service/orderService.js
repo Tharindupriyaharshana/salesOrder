@@ -19,8 +19,9 @@ const getAllOrders = () => {
   };
   
   //create new order
+  let state=1;
   const createNewOrder = async(req) => {
- var state=0;
+
 
  console.log( req.body.order.orderData);
  console.log(req.body.order.orderItems);
@@ -38,31 +39,38 @@ const getAllOrders = () => {
 
                 var orderItemsList=[];
                 orderItemsList=req.body.order.orderItems
-                orderItemsList.forEach(Item=> {
-state=0;
+                orderItemsList.forEach(async Item=> {
+       
                     const orderIems= new orderdata(
                         Item
                             
                        
                     );
                        
-                     orderIems.save().then(status=>{
+                  await   orderIems.save().then(status=>{
                         if(status){
-                            state=1;
+                       state =1;
                         };
-                    
+                       
                 })
-                return state;
+                
+                
                 });
-                   
+               
+           
                     
                 } catch (error) {
+                 state=0;
                     return state;
+                  
                 }
-                
+               
             }
+            console.log("71"+state);
+            return state;
+            
 });
-
+return state;
    
   };
   

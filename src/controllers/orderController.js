@@ -11,12 +11,16 @@ const getAllorders = (req, res) => {
   };
   
   const createNewOrder = (req, res) => {
-    const createdOrder = orderService.createNewOrder(req);
-    if(createdOrder==1){
-      res.send(createdOrder);
-    }else{
-      res.send(createdOrder);
-    }
+    const createdOrder = orderService.createNewOrder(req).then(response=>{
+      console.log(createdOrder);
+      if(response==1){
+        res.send("Done");
+      }else{
+        res.send("not Done");
+      }
+
+    });
+   
     
   };
   
