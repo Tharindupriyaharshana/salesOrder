@@ -1,9 +1,15 @@
 
 const orderService = require("../service/orderService");
 
-const getAllorders = (req, res) => {
-  const allOrders = orderService.getAllOrders();
-    res.send(allOrders);
+const getAllorders = async (req, res) => {
+  try {
+    const allOrders =  await orderService.getAllOrders();
+    res.send({ status: "OK", data: allOrders });
+  } catch (error) {
+    res
+      .status(error?.status || 500)
+      .send({ status: "FAILED", data: { error: error?.message || error } });
+  }
   };
   
   const getOneOrder = (req, res) => {

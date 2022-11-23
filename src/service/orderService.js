@@ -9,8 +9,31 @@ var path = require('path');
 const auth = express();
 
 
-const getAllOrders = () => {
-    return;
+const getAllOrders =  async () => {
+  try {
+   
+    let result=[];
+
+    await order.aggregate([
+    
+       { $match: { "status":"pending" } }
+           
+    
+    
+        ]).then((documents => {
+            result.push(documents);
+     
+    
+        }));
+    
+    return result;
+  
+     
+ 
+  } catch (error) {
+    console.log(error);
+        throw error;
+  }
   };
   
   const getOneOrder = () => {
